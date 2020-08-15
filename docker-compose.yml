@@ -2,6 +2,7 @@ version: '3'
 services:
   server:                          
     build: ./server
+    container_name: server
     volumes:
       - ./server/:/app      
       - /app/node_modules      
