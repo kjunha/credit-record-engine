@@ -1,0 +1,31 @@
+version: '3'
+services:
+  server:                          
+    build: ./server
+    volumes:
+      - ./server/:/app      
+      - /app/node_modules      
+    environment:
+      - NODE_PATH=src
+      - PORT=8080
+      - DB_HOST=mongo
+      - DB=test
+    depends_on:
+      - mongo
+    ports:
+      - "8080:8080"
+    networks:
+      - backend
+  mongo:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - ./data/db:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - backend
+
+networks: 
+  backend:
+    driver: bridge
